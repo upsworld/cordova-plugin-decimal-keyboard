@@ -226,13 +226,15 @@ BOOL stopSearching=NO;
 - (void) evaluateJavaScript:(NSString *)script
           completionHandler:(void (^ _Nullable)(NSString * _Nullable response, NSError * _Nullable error))completionHandler {
 
-    if ([self.webView isKindOfClass:UIWebView.class]) {
+    // This was support for old UIWebView
+    /*if ([self.webView isKindOfClass:UIWebView.class]) {
         UIWebView *webview = (UIWebView*)self.webView;
         NSString *response = [webview stringByEvaluatingJavaScriptFromString:script];
         if (completionHandler) completionHandler(response, nil);
     }
     
-    else if ([self.webView isKindOfClass:WKWebView.class]) {
+    else */
+    if ([self.webView isKindOfClass:WKWebView.class]) {
         WKWebView *webview = (WKWebView*)self.webView;
         [webview evaluateJavaScript:script completionHandler:^(id result, NSError *error) {
             if (completionHandler) {
